@@ -44,7 +44,7 @@ namespace :slack do
   desc "Send slack notification about new deploy start"
   task :notify_deploy_started => :environment do
     queue  %[echo "-----> Sending start notification to Slack"]
-    text = "[Deploying] #{slack_author} is deploying #{application} on #{domain}..."
+    text = "*[Deploying] #{slack_author} is deploying #{application} on #{domain}...\n*"
 
     for channel in slack_channels
       send_message(
@@ -59,8 +59,8 @@ namespace :slack do
   task :notify_deploy_finished => :environment do
     queue  %[echo "-----> Sending finish notification to Slack"]
 
-    text  = "#{slack_author} finished deploying #{application}."
-    text += " on server #{domain}" if domain != nil
+    text  = "*#{slack_author} finished deploying #{application}.*"
+    text += " on server #{domain} \n" if domain != nil
 
     for channel in slack_channels
       send_message(
@@ -76,11 +76,12 @@ namespace :slack do
   task :notify_deploying => :environment do
     queue  %[echo "-----> Sending finish notification to Slack"]
 
-    text  = "#{slack_author} finished deploying #{application}."
-    text += " on server #{domain}" if domain != nil
+    text  = "*#{slack_author} finished deploying #{application}.*"
+    text += " on server #{domain} \n" if domain != nil
     # git_logs = %x[git log --stat]
     git_logs = %x[git log --pretty=format:"%an (%h) %s" -n 5]
-    text += "\n#{git_logs}\n"
+    text += "#{slack_author}*​ deployed version ​**​ of #{application} in #{rails_env} (#{domain}) \n"
+    text += "> #{git_logs}"
 
     for channel in slack_channels
       send_message(
@@ -93,7 +94,7 @@ namespace :slack do
 
   def send_message(params = {})
     slack_url = "https://#{slack_team_domain}.slack.com/services/hooks/slackbot?token=#{slack_api_token}&channel=%23#{params[:channel]}"
-    HTTParty.post(slack_url, {body: params[:text]})
+    HTTParty.post(slack_url, {text: params[:text]})
   end
 
 end
