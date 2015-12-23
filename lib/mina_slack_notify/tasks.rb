@@ -17,7 +17,7 @@ set_default :slack_channels, []
 # Sets the notification 'from' user label
 set_default :slack_username, 'Mina'
 
-# ### slack_author
+# slack_author
 # Sets the deployment author name
 set_default :slack_author, 'Mina'
 
@@ -25,26 +25,26 @@ set_default :slack_author, 'Mina'
 # Sets the deployment author name
 set_default :slack_link_names, 1
 
-# ### slack_parse
+# slack_parse
 # Sets the deployment author name
 set_default :slack_parse, 'full'
 
-# ### icon_url
+# icon_url
 # URL to an image to use as the icon for this message
 set_default :slack_icon_url, ''
 
-# ### icon_emoji
+# icon_emoji
 # Sets emoji to use as the icon for this message. Overrides `slack_icon_url`
 set_default :slack_icon_emoji, ':slack:'
 
-# ## Control Tasks
+# Control Tasks
 namespace :slack do
 
-  # ## slack:notify_deploy_started
+  # slack:notify_deploy_started
   desc "Send slack notification about new deploy start"
   task :notify_deploy_started => :environment do
     queue  %[echo "-----> Sending start notification to Slack"]
-    text = "#{slack_author} is deploying #{application} on #{domain}..."
+    text = "[Deploying] #{slack_author} is deploying #{application} on #{domain}..."
 
     for channel in slack_channels
       send_message(
@@ -54,13 +54,13 @@ namespace :slack do
     end
   end
 
-  # ## slack:notify_deploy_finished
+  # slack:notify_deploy_finished
   desc "Send slack notification about deploy finish"
   task :notify_deploy_finished => :environment do
     queue  %[echo "-----> Sending finish notification to Slack"]
 
     text  = "#{slack_author} finished deploying #{application}."
-    text += " Server: http://#{domain}" if domain != nil
+    text += " on server #{domain}" if domain != nil
 
     for channel in slack_channels
       send_message(
@@ -77,5 +77,3 @@ namespace :slack do
   end
 
 end
-
-# HTTParty.post('https://nhantamdev.slack.com/services/hooks/slackbot?token=6TNMVUTGhULcErjbbUZhZ72j&channel=%23general', {body: "Test from httparty"})
