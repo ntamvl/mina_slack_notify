@@ -22,9 +22,9 @@ Or install it yourself as:
 
 ## Usage example
 
-    require 'mina_slack/tasks'
+    require 'mina_slack_notify/tasks'
     ...
-    # Required mina_slack options
+    # Required mina_slack_notify options
     set :slack_api_token, 'xxxyyyzzz'
     set :slack_channels, ['#general', '@mbajur', '#nerd']
 
