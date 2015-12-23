@@ -15,11 +15,11 @@ set_default :slack_channels, []
 
 # ### slack_username
 # Sets the notification 'from' user label
-set_default :slack_username, 'Deploy'
+set_default :slack_username, 'Mina'
 
 # ### slack_author
 # Sets the deployment author name
-set_default :slack_author, 'Someone'
+set_default :slack_author, 'Mina'
 
 # ### slack_link_names
 # Sets the deployment author name
@@ -44,7 +44,7 @@ namespace :slack do
   desc "Send slack notification about new deploy start"
   task :notify_deploy_started => :environment do
     queue  %[echo "-----> Sending start notification to Slack"]
-    text = "#{slack_author} is deploying #{application}..."
+    text = "#{slack_author} is deploying #{application} on #{domain}..."
 
     for channel in slack_channels
       send_message(
@@ -60,7 +60,7 @@ namespace :slack do
     queue  %[echo "-----> Sending finish notification to Slack"]
 
     text  = "#{slack_author} finished deploying #{application}."
-    text += " See it here: http://#{domain}" if domain != nil
+    text += " Server: http://#{domain}" if domain != nil
 
     for channel in slack_channels
       send_message(
