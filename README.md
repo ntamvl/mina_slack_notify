@@ -25,9 +25,13 @@ Or install it yourself as:
     require 'mina_slack_notify/tasks'
     ...
     # Required mina_slack_notify options
+    ...
+    set :application, "app_name"
+    ...
     set :slack_api_token, 'xxxyyyzzz'
     set :slack_channels, ['#general', '@mbajur', '#nerd']
     set :slack_team_domain, 'team_domain'
+    set :slack_author, 'tam'
 
     task :deploy do
       deploy do
