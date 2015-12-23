@@ -73,7 +73,8 @@ namespace :slack do
 
   def send_message(params = {})
     slack_url = "https://#{slack_team_domain}.slack.com/services/hooks/slackbot?token=#{slack_api_token}&channel=#{params[:channel]}"
-    HTTParty.post(slack_url, params[:text])
+    # HTTParty.post(slack_url, {body: params[:text]})
+    HTTParty.post('https://nhantamdev.slack.com/services/hooks/slackbot?token=6TNMVUTGhULcErjbbUZhZ72j&channel=%23general', {body: "Test from httparty"})
   end
 
 end
