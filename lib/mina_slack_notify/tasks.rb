@@ -71,6 +71,26 @@ namespace :slack do
     end
   end
 
+  # slack:notify_deploy_finished
+  desc "Send slack notification about deploying"
+  task :notify_deploying => :environment do
+    queue  %[echo "-----> Sending finish notification to Slack"]
+
+    text  = "#{slack_author} finished deploying #{application}."
+    text += " on server #{domain}" if domain != nil
+    # git_logs = %x[git log --stat]
+    git_logs = %x[git log --pretty=format:"%an (%h) %s" -n 5]
+    text += "\n#{git_logs}\n"
+
+    for channel in slack_channels
+      send_message(
+        channel:     channel,
+        text:        text,
+        attachments: attachments
+      )
+    end
+  end
+
   def send_message(params = {})
     slack_url = "https://#{slack_team_domain}.slack.com/services/hooks/slackbot?token=#{slack_api_token}&channel=%23#{params[:channel]}"
     HTTParty.post(slack_url, {body: params[:text]})
