@@ -28,6 +28,19 @@ Or install it yourself as:
     ...
     set :application, "app_name"
     ...
+
+    ...
+    # example: mina deploy env=developmet
+    if !ENV['env'].nil? && ENV['env'] == "production"
+      set :domain, '[ip_or_domain_production]'
+      set :server_name, "production"
+      puts "You are running on producion"
+    else
+      set :domain, '[ip_or_domain_development]'
+      set :server_name, "development"
+      puts "You are running on developmet"
+    end
+    ...
     set :slack_api_token, 'xxxyyyzzz'
     set :slack_channels, ['#general', '@mbajur', '#nerd']
     set :slack_team_domain, 'team_domain'
