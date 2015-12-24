@@ -76,9 +76,10 @@ namespace :slack do
   task :notify_deploying => :environment do
     queue  %[echo "-----> Sending finish notification to Slack"]
 
-    text  = "[auto deployment] *#{slack_author}* finished deploying *#{application}*."
-    text += " on server #{domain} \n" if domain != nil
+    # text  = "[auto deployment] *#{slack_author}* finished deploying *#{application}*."
+    # text += " on server #{domain} \n" if domain != nil
     # git_logs = %x[git log --stat]
+
     git_logs = %x[git log --pretty=format:"%an (%h) %s" -n 5]
     text += "*#{slack_author}* deployed #{application} in #{rails_env} (#{domain}) \n"
     # text += "> #{git_logs}"
