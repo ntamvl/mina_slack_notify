@@ -61,6 +61,7 @@ Or install it yourself as:
 
 ## Available Tasks
 
+* `slack:notify_deploying`
 * `slack:notify_deploy_started`
 * `slack:notify_deploy_finished`
 
