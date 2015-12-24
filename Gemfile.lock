@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mina_slack_notify (0.1.2)
+    mina_slack_notify (0.1.3)
       mina (~> 0.3)
 
 GEM
