@@ -22,13 +22,14 @@ Or install it yourself as:
 
 ## Usage example
 
+    require 'mina_slack_notify'
     require 'mina_slack_notify/tasks'
     ...
     # Required mina_slack_notify options
     ...
     set :application, "app_name"
     ...
-
+    after_mina :'slack:notify_deploying'
     ...
     # example: mina deploy env=developmet
     if !ENV['env'].nil? && ENV['env'] == "production"
@@ -48,12 +49,12 @@ Or install it yourself as:
 
     task :deploy do
       deploy do
-        invoke :'slack:notify_deploy_started'
+        # invoke :'slack:notify_deploy_started'
         ...
 
         to :launch do
           ...
-          invoke :'slack:notify_deploy_finished'
+          # invoke :'slack:notify_deploy_finished'
         end
       end
     end
