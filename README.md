@@ -31,7 +31,7 @@ Or install it yourself as:
     set :slack_api_token, 'xxxyyyzzz'
     set :slack_channels, ['#general', '@mbajur', '#nerd']
     set :slack_team_domain, 'team_domain'
-    set :slack_author, 'tam'
+    set :slack_author, %x[git config user.email]
 
     task :deploy do
       deploy do
