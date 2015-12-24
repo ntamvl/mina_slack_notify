@@ -81,8 +81,7 @@ namespace :slack do
     # git_logs = %x[git log --stat]
 
     git_logs = %x[git log --pretty=format:"%an (%h) %s" -n 5]
-    text += "*#{slack_author}* deployed #{application} in #{rails_env} (#{domain}) \n"
-    # text += "> #{git_logs}"
+    text = "*#{slack_author}* deployed #{application} in #{rails_env} (#{domain}) \n"
     git_logs.each_line do |line|
       text += "> #{line}"
     end
