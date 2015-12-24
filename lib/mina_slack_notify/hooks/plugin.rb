@@ -1,7 +1,3 @@
-# Provides local task hooks that run before and after the mina_cleanup!.
-#
-# Uses `self.` to cope with the liberal `method_missing` usage in Mina.
-
 module Mina
   module Hooks
     module Plugin
