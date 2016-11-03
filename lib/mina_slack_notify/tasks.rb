@@ -45,9 +45,9 @@ namespace :slack do
   task :notify_deploy_started => :environment do
     # queue  %[echo "-----> Sending start notification to Slack"]
     comment %{Sending start notification to Slack}
-    text = "[Deploying] #{slack_author} is deploying #{application} on #{domain}...\n"
+    text = "[Deploying] #{fetch(:slack_author)} is deploying #{fetch(:application)} on #{fetch(:domain)}...\n"
 
-    for channel in slack_channels
+    for channel in fetch(:slack_channels)
       send_message(
         channel: channel,
         text:    text
@@ -61,8 +61,10 @@ namespace :slack do
     # queue  %[echo "-----> Sending finish notification to Slack"]
     comment %{Sending finish notification to Slack}
 
-    text  = "#{slack_author} finished deploying #{application}."
-    text += " on server #{domain} \n" if domain != nil
+    text  = "#{fetch(:slack_author)} finished deploying #{fetch(:application)}."
+    text += " on server #{fetch(:domain)} \n" if fetch(:domain) != nil
+    attachments = fetch(:attachments)
+    slack_channels = fetch(:slack_channels)
 
     for channel in slack_channels
       send_message(
@@ -81,13 +83,15 @@ namespace :slack do
 
     # text  = "[auto deployment] *#{slack_author}* finished deploying *#{application}*."
     # text += " on server #{domain} \n" if domain != nil
-    # git_logs = %x[git log --stat]
+    git_logs = %x[git log --stat]
 
     git_logs = %x[git log --pretty=format:"%an (%h) %s" -n 5]
-    text = "*#{slack_author.delete!("\n")}* deployed #{application} in #{server_name} (#{domain}) \n"
+    text = "*#{fetch(:slack_author).delete!("\n")}* deployed #{fetch(:application)} in #{fetch(:server_name)} (#{fetch(:domain)}) \n"
     git_logs.each_line do |line|
       text += "> #{line}"
     end
+
+    attachments = fetch(:attachments)
 
     for channel in slack_channels
       send_message(
@@ -99,7 +103,7 @@ namespace :slack do
   end
 
   def send_message(params = {})
-    slack_url = "https://#{slack_team_domain}.slack.com/services/hooks/slackbot?token=#{slack_api_token}&channel=%23#{params[:channel]}"
+    slack_url = "https://#{slack_team_domain}.slack.com/services/hooks/slackbot?token=#{fetch(:slack_api_token)}&channel=%23#{params[:channel]}"
     HTTParty.post(slack_url, {body: params[:text]})
   end
 
