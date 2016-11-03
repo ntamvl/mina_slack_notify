@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "mina_slack_notify"
   spec.version       = MinaSlackNotify::VERSION
   spec.authors       = ["Tam Nguyen"]
-  spec.email         = ["nguyentamvinhlong@gmail.com"]
+  spec.email         = ["ntamvl@gmail.com"]
 
   spec.summary       = "Adds tasks to aid in the Slack notifications"
   spec.description   = "Mina bindings for Slack"
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "mina", "~> 0.3.8"
+  spec.add_dependency "mina", "~> 1.0.2"
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 11.2"
