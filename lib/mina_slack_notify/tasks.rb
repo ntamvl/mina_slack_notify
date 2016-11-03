@@ -1,5 +1,5 @@
-# require "mina/bundler"
-# require "mina/rails"
+require "mina/bundler"
+require "mina/rails"
 require 'json'
 require 'httparty'
 
@@ -97,6 +97,7 @@ namespace :slack do
     attachments = fetch(:attachments)
 
     slack_channels = fetch(:slack_channels)
+    puts "\nslack_channels: #{slack_channels} \n"
     for channel in slack_channels
       send_message(
         channel:     channel,
