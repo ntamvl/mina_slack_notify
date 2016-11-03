@@ -6,36 +6,36 @@ require 'httparty'
 
 # ### slack_api_token
 # Sets the slack api auth token.
-set_default :slack_api_token, ''
-set_default :slack_team_domain, ''
+set :slack_api_token, ''
+set :slack_team_domain, ''
 
 # ### slack_channels
 # Sets the channels where notifications will be sent to.
-set_default :slack_channels, []
+set :slack_channels, []
 
 # ### slack_username
 # Sets the notification 'from' user label
-set_default :slack_username, 'Mina'
+set :slack_username, 'Mina'
 
 # slack_author
 # Sets the deployment author name
-set_default :slack_author, 'Mina'
+set :slack_author, 'Mina'
 
 # ### slack_link_names
 # Sets the deployment author name
-set_default :slack_link_names, 1
+set :slack_link_names, 1
 
 # slack_parse
 # Sets the deployment author name
-set_default :slack_parse, 'full'
+set :slack_parse, 'full'
 
 # icon_url
 # URL to an image to use as the icon for this message
-set_default :slack_icon_url, ''
+set :slack_icon_url, ''
 
 # icon_emoji
 # Sets emoji to use as the icon for this message. Overrides `slack_icon_url`
-set_default :slack_icon_emoji, ':slack:'
+set :slack_icon_emoji, ':slack:'
 
 # Control Tasks
 namespace :slack do
