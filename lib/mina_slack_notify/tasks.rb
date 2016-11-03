@@ -43,7 +43,8 @@ namespace :slack do
   # slack:notify_deploy_started
   desc "Send slack notification about new deploy start"
   task :notify_deploy_started => :environment do
-    queue  %[echo "-----> Sending start notification to Slack"]
+    # queue  %[echo "-----> Sending start notification to Slack"]
+    comment %{Sending start notification to Slack}
     text = "[Deploying] #{slack_author} is deploying #{application} on #{domain}...\n"
 
     for channel in slack_channels
@@ -57,7 +58,8 @@ namespace :slack do
   # slack:notify_deploy_finished
   desc "Send slack notification about deploy finish"
   task :notify_deploy_finished => :environment do
-    queue  %[echo "-----> Sending finish notification to Slack"]
+    # queue  %[echo "-----> Sending finish notification to Slack"]
+    comment %{Sending finish notification to Slack}
 
     text  = "#{slack_author} finished deploying #{application}."
     text += " on server #{domain} \n" if domain != nil
@@ -74,7 +76,8 @@ namespace :slack do
   # slack:notify_deploy_finished
   desc "Send slack notification about deploying"
   task :notify_deploying => :environment do
-    queue  %[echo "-----> Sending finish notification to Slack"]
+    # queue  %[echo "-----> Sending finish notification to Slack"]
+    comment %{Sending finish notification to Slack}
 
     # text  = "[auto deployment] *#{slack_author}* finished deploying *#{application}*."
     # text += " on server #{domain} \n" if domain != nil
