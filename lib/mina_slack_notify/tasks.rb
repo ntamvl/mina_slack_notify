@@ -99,7 +99,7 @@ namespace :slack do
     slack_channels = fetch(:slack_channels)
     for channel in slack_channels
       Thread.new do
-        sleep 3
+        sleep 5
         send_message(
           channel:     channel,
           text:        text,
