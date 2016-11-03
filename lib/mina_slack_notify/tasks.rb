@@ -49,6 +49,7 @@ namespace :slack do
     comment %{Sending start notification to Slack}
     text = "[Deploying] #{fetch(:slack_author)} is deploying #{fetch(:application)} on #{fetch(:domain)}...\n"
 
+    slack_channels = fetch(:slack_channels)
     for channel in fetch(:slack_channels)
       send_message(
         channel: channel,
@@ -95,6 +96,7 @@ namespace :slack do
 
     attachments = fetch(:attachments)
 
+    slack_channels = fetch(:slack_channels)
     for channel in slack_channels
       send_message(
         channel:     channel,
