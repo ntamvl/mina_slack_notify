@@ -1,3 +1,5 @@
+require "mina/bundler"
+require "mina/rails"
 require 'json'
 require 'httparty'
 
