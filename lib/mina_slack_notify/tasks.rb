@@ -97,8 +97,8 @@ namespace :slack do
     attachments = fetch(:attachments)
 
     slack_channels = fetch(:slack_channels)
-    puts "\nslack_channels: #{slack_channels} \n"
     for channel in slack_channels
+      sleep 3
       send_message(
         channel:     channel,
         text:        text,
