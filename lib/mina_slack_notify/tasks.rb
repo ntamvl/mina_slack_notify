@@ -1,46 +1,46 @@
-require "mina/bundler"
-require "mina/rails"
+# require "mina/bundler"
+# require "mina/rails"
 require 'json'
 require 'httparty'
 
-# ## Settings
-# Any and all of these settings can be overriden in your `deploy.rb`.
-
-# ### slack_api_token
-# Sets the slack api auth token.
-set :slack_api_token, ''
-set :slack_team_domain, ''
-
-# ### slack_channels
-# Sets the channels where notifications will be sent to.
-set :slack_channels, []
-
-# ### slack_username
-# Sets the notification 'from' user label
-set :slack_username, 'Mina'
-
-# slack_author
-# Sets the deployment author name
-set :slack_author, 'Mina'
-
-# ### slack_link_names
-# Sets the deployment author name
-set :slack_link_names, 1
-
-# slack_parse
-# Sets the deployment author name
-set :slack_parse, 'full'
-
-# icon_url
-# URL to an image to use as the icon for this message
-set :slack_icon_url, ''
-
-# icon_emoji
-# Sets emoji to use as the icon for this message. Overrides `slack_icon_url`
-set :slack_icon_emoji, ':slack:'
-
 # Control Tasks
 namespace :slack do
+  # ## Settings
+  # Any and all of these settings can be overriden in your `deploy.rb`.
+
+  # ### slack_api_token
+  # Sets the slack api auth token.
+  set :slack_api_token, ''
+  set :slack_team_domain, ''
+
+  # ### slack_channels
+  # Sets the channels where notifications will be sent to.
+  set :slack_channels, []
+
+  # ### slack_username
+  # Sets the notification 'from' user label
+  set :slack_username, 'Mina'
+
+  # slack_author
+  # Sets the deployment author name
+  set :slack_author, 'Mina'
+
+  # ### slack_link_names
+  # Sets the deployment author name
+  set :slack_link_names, 1
+
+  # slack_parse
+  # Sets the deployment author name
+  set :slack_parse, 'full'
+
+  # icon_url
+  # URL to an image to use as the icon for this message
+  set :slack_icon_url, ''
+
+  # icon_emoji
+  # Sets emoji to use as the icon for this message. Overrides `slack_icon_url`
+  set :slack_icon_emoji, ':slack:'
+
 
   # slack:notify_deploy_started
   desc "Send slack notification about new deploy start"
